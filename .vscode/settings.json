@@ -2,11 +2,14 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true,
+        
         "editor.codeActionsOnSave": 
         {
             "source.organizeImports": true,
             "source.fixAll": true
         }
     },
-    "python.analysis.typeCheckingMode": "basic"
+    "black-formatter.interpreter":["./.venv/bin/python"],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true
 }
