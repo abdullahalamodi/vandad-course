@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.postgres import fields as PostgresFields
+from .managers import ProductManager
 
 
 class ProductCategory(models.Model):
@@ -65,6 +66,8 @@ class Product(models.Model):
         blank=True,
         null=True,
     )
+
+    objects = ProductManager()
 
     def __str__(self):
         return f"{self.title} - {self.subtitle} - {self.maker}"

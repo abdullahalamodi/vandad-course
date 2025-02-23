@@ -1,22 +1,65 @@
-from django.shortcuts import render
+from urllib import request
+from rest_framework import generics, permissions, authentication
 
-from rest_framework.generics import ListAPIView
-
+from utils.mixins import (
+    ResponseWrapperMixin,
+    StaffEditorPermissionMixin,
+    UserQuerysetMixin,
+)
 from .models import Maker, Product, ProductCategory
-
 from .serializers import MakerSerializer, ProductCategorySerializer, ProductSerializer
 
 
-class ProductCategoryListView(ListAPIView):
-    serializer_class = ProductCategorySerializer
+class ProductCategoryListView(generics.ListAPIView):
     queryset = ProductCategory.objects.all()
+    serializer_class = ProductCategorySerializer
 
 
-class MakerListView(ListAPIView):
-    serializer_class = MakerSerializer
+class MakerListView(generics.ListAPIView):
     queryset = Maker.objects.all()
+    serializer_class = MakerSerializer
 
 
-class ProductListView(ListAPIView):
-    serializer_class = ProductSerializer
+# products
+
+
+class ProductListView(
+    StaffEditorPermissionMixin,
+    ResponseWrapperMixin,
+    generics.ListAPIView,
+):
     queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductDetailsView(
+    # StaffEditorPermissionMixin,
+    ResponseWrapperMixin,
+    generics.RetrieveAPIView,
+):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductCreateView(
+    StaffEditorPermissionMixin,
+    generics.CreateAPIView,
+):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductUpdateView(
+    StaffEditorPermissionMixin,
+    generics.UpdateAPIView,
+):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductDestroyView(
+    StaffEditorPermissionMixin,
+    generics.DestroyAPIView,
+):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
