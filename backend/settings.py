@@ -160,8 +160,8 @@ REST_FRAMEWORK = {
 
 
 ALGOLIA = {
-    "APPLICATION_ID": "your app id ",
-    "API_KEY": "your api key",
+    "APPLICATION_ID": env("ALGOLIA_APPLICATION_ID"),
+    "API_KEY": env("ALGOLIA_API_KEY"),
 }
 
 SIMPLE_JWT = {
